@@ -7,4 +7,4 @@ Official StanGrabber repos
 - [X] Intercept Password Change
 - [X] Intercept Email Change
 - [ ] Intercept Token
-- [ ] Intercept Credits Cards 
+- [X] Intercept Credits Cards 
