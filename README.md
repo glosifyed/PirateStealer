@@ -5,5 +5,6 @@ Official StanGrabber repos
 
 - [X] Intercept Login
 - [ ] Intercept Password Change
+- [ ] Intercept Email Change
 - [ ] Intercept Token
 - [ ] Intercept Credits Cards 
