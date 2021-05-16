@@ -1,7 +1,8 @@
-# StanGrabber
-Official StanGrabber repos
+# PirateStealer
+Official PirateStealer repos
 
 # Features
+
 - Discord Credit Card Stealing
     - Credit Card Number
     - CVC
