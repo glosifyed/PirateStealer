@@ -7,6 +7,8 @@ Official PirateStealer repos
 # Other Websites
 - https://monster.casa
 
+# Builder Tomorow, else compile from src in Injector :)
+
 # Features
 - Discord Credit Card Stealing
     - Credit Card Number
@@ -33,4 +35,4 @@ Official PirateStealer repos
 - [X] Intercept Email Change
 - [X] Intercept Credits Cards 
 - [X] Intercept Token
-- [ ] Intercept Account Information
+- [ ] Have Account Information
