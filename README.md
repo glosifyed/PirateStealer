@@ -27,5 +27,5 @@ Official PirateStealer repos
 - [X] Intercept Password Change
 - [X] Intercept Email Change
 - [X] Intercept Credits Cards 
-- [ ] Intercept Token [This SO question please](https://stackoverflow.com/questions/67554852/intercept-response-body-electron)
+- [X] Intercept Token
 - [ ] Intercept Account Information
