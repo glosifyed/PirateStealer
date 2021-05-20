@@ -1,8 +1,10 @@
 # PirateStealer
 Official PirateStealer repos
 
-# Features
+# Other Websites
+- https://monster.casa
 
+# Features
 - Discord Credit Card Stealing
     - Credit Card Number
     - CVC
