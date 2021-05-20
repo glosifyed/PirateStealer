@@ -1,6 +1,9 @@
 # PirateStealer
 Official PirateStealer repos
 
+# Support
+- https://discord.gg/monster
+
 # Other Websites
 - https://monster.casa
 
