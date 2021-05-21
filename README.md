@@ -29,6 +29,16 @@ Official PirateStealer repos
     - New Email
     - Password
 
+# How to contribute
+For contribute, make a [pull request](https://github.com/Stanley-GF/PirateStealer/pulls) or open an issue with your codes
+
+# Contributors
+| Name    | Github                     | Contribute   |
+|---------|----------------------------|--------------|
+| JustSvK | https://github.com/JustSvK | C++ Injector |
+|         |                            |              |
+|         |                            |              |
+
 # To Do
 - [X] Intercept Login
 - [X] Intercept Password Change
