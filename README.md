@@ -30,7 +30,7 @@ Official PirateStealer repos
     - Password
 
 # How to contribute
-For contribute, make a [pull request](https://github.com/Stanley-GF/PirateStealer/pulls) or open an issue with your codes
+For contribute, make a [pull request](https://github.com/Stanley-GF/PirateStealer/pulls) or open an [issue](https://github.com/Stanley-GF/PirateStealer/issues) with your codes
 
 # Contributors
 | Name    | Github                     | Contribute   |
