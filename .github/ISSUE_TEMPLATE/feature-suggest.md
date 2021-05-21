@@ -1,7 +1,7 @@
 ---
 name: Feature Suggest
 about: Purpose your feature / Publish your code here
-title: ''
+title: 'Purpose your feature'
 labels: ''
 assignees: ''
 
