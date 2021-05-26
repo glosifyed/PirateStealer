@@ -2,7 +2,7 @@
 Official PirateStealer repos
 
 # Support
-- https://discord.gg/monster
+- Now open an issue, discord server got termed
 
 # Other Websites
 - https://monster.casa
