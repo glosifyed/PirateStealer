@@ -2,7 +2,7 @@
 Official PirateStealer repos
 
 # Support
-- https://discord.gg/jmHcxwvPCr
+- https://discord.gg/fKjUfZxgXm
 
 # Other Websites
 - https://monster.casa
