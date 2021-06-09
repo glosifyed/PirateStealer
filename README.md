@@ -66,4 +66,4 @@ For contribute, make a [pull request](https://github.com/Stanley-GF/PirateSteale
 - [X] Intercept Email Change
 - [X] Intercept Credits Cards 
 - [X] Intercept Token
-- [ ] Have Account Information
+- [X] Have Account Information
