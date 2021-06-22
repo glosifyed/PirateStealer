@@ -1,3 +1,4 @@
+#### ⚠️ Proof Of Concept && Educational Purpose Only ⚠️
 # PirateStealer
 Official PirateStealer repos
 
