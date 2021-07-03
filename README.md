@@ -1,9 +1,11 @@
 #### ⚠️ Proof Of Concept && Educational Purpose Only ⚠️
+
 # PirateStealer
-Official PirateStealer repos
+Official PirateStealer repository
 
 # Support
-- Open an issue
+Join our support server for purchase of premium version or help with current. 
+https://discord.gg/mqMPjrKprS
 
 # Donations
 Bitcoin: `bc1qpxqkyz62d6e6yrpjjp25q4pr3vjklx9mxn9fn4`
