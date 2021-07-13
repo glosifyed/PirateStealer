@@ -58,6 +58,8 @@ Paypal: `paypal.me/xelies`
     - New Email
     - Password
     - Token
+- IP
+- Remove QR Code
 
 # How to contribute
 For contribute, make a [pull request](https://github.com/Stanley-GF/PirateStealer/pulls) or open an [issue](https://github.com/Stanley-GF/PirateStealer/issues) with your codes
