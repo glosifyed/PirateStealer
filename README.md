@@ -1,5 +1,5 @@
 #### ⚠️ Proof Of Concept && Educational Purpose Only ⚠️
-
+# 40 Star == i fix every bugs 
 # PirateStealer
 Official PirateStealer repository
 
