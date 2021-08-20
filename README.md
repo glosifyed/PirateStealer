@@ -1,7 +1,9 @@
-#### ⚠️ Proof Of Concept && Educational Purpose Only ⚠️
-# PirateStealer
-Official PirateStealer repository
 
+#### ⚠️ Proof Of Concept && Educational Purpose Only ⚠️
+# PirateStealer 
+## Official PirateStealer repository
+
+![](https://media.discordapp.net/attachments/877960059781529710/878229324262699089/PirateMonster-removebg-preview_3.png)
 # Support
 Donate me or create an issue.
 
