@@ -1,5 +1,5 @@
 
-# :trumpet: Make your own injector in your own language and make a Pull Request 🎺
+# :trumpet: Make your own injector in your own language and make an issue with your injector, I'll publish it by crediting you and if it's the more used & more liked, you'll get 1 year of Nitro or 25€ EUR 🎺
 #### ⚠️ Proof Of Concept && Educational Purpose Only && KingFA == Skid⚠️
 # PirateStealer 
 ## Official PirateStealer repository
