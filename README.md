@@ -1,4 +1,3 @@
-# Contact me on Discord if u wanna buy the premium version and know his feature.
 #### ⚠️ Proof Of Concept && Educational Purpose Only ⚠️
 # PirateStealer 
 ## Official PirateStealer repository
