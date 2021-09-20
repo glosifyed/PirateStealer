@@ -1,4 +1,4 @@
-#### ⚠️ Proof Of Concept && Educational Purpose Only ⚠️
+#### ⚠️ Proof Of Concept && Educational Purpose Only && KingFA == Skid⚠️
 # PirateStealer 
 ## Official PirateStealer repository
 
