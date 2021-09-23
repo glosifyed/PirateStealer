@@ -20,7 +20,7 @@ namespace PirateMonsterInjector
 {
     public class Settings
     {
-        public static string Webhook = "come on noob there no virus.";
+        public static string Webhook = "webhook";
     }
     public static class BinaryFilePatchExtensions
     {
