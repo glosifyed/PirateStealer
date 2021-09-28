@@ -4,7 +4,7 @@
 
 ![](https://media.discordapp.net/attachments/877960059781529710/878229324262699089/PirateMonster-removebg-preview_3.png)
 # Support
-https://discord.gg/jesusissus
+https://discord.gg/terms
 
 # Donations
 Bitcoin: `bc1qpxqkyz62d6e6yrpjjp25q4pr3vjklx9mxn9fn4`
